@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-# from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -26,14 +25,17 @@ class UserProfile(models.Model):
     skills = models.ManyToManyField(Technology, blank=True)
     github = models.URLField(null=True, blank=True)
     twitter = models.CharField(max_length=100, null=True, blank=True)
-    # ratings = ArrayField(models.SmallIntegerField(null=False, blank=False,), null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.email
+
+    @property
+    def reviews(self):
+        return sum(self.rating_to) / len(self.rating_to)
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=264)
+    name = models.CharField(max_length=264, verbose_name='Project Name')
     description = models.TextField()
     owner = models.ForeignKey(User, related_name='owner')
     participants = models.ManyToManyField(User, blank=True)
@@ -53,10 +55,6 @@ class Project(models.Model):
         return total
 
         # sum(task.points for task in self.tasks)
-
-    @property
-    def reviews(self):
-        return sum(self.rating_to) / len(self.rating_to)
 
 
 class Rating(models.Model):

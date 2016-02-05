@@ -14,6 +14,17 @@ class ProjectListView(ListView):
     model = Project
 
 
+class ProjectCreateView(CreateView):
+
+    template_name = 'project_create.html'
+    model = Project
+    fields = ['name', 'description', 'owner', 'participants', 'deadline',
+              'technologies', 'max_people', 'created_at']
+
+    # def get_success_url(self):
+    #     return '/project/{0}'.format(self.object.id)
+
+
 class UserListView(ListView):
     template_name = 'user_list.html'
     model = User

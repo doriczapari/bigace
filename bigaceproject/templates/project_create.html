@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <div>
+        <form role="form" method="POST">
+        {% csrf_token %}
+        <div class="row">
+        {% for field in form %}
+            <div {% if field.errors %}has-error{% endif %}>
+                <label for="{{ id_for_label }}">
+                    <span class="title {% if field.field.required %}required{% endif %}">{{ field.label }}</span>
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </label>
+
+                    {{ field }}
+            </div>
+        {% endfor %}
+        </div>
+        <div>
+            <button type="submit" > Start a wonderful journey! </button>
+        </div>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 from django.db import models
 # Create your models here.
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Technology(models.Model):
@@ -20,12 +21,22 @@ class Project(models.Model):
     owner = models.ForeignKey(User, related_name='owner')
     participants = models.ManyToManyField(User, blank=True)
     deadline = models.DateField(null=True, blank=True)
-    time = models.PositiveSmallIntegerField(null=True, blank=True)
     technologies = models.ManyToManyField(Technology, blank=True)
     max_people = models.PositiveSmallIntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    @property
+    def total_points(self):
+        total = 0
+        for task in self.tasks:
+            total += task.points
+        return total
+
+        # sum(task.points for task in self.tasks)
 
 
 class Task(models.Model):
     name = models.CharField(max_length=264)
     project = models.ForeignKey(Project, related_name='tasks')
     completed = models.BooleanField(default=False)
+    points = models.PositiveSmallIntegerField(null=True, blank=True)

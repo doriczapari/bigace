@@ -1,0 +1,10 @@
+.main-content {
+  margin-left: 15px;
+}
+
+.sidebar {
+  background-color:#777777;
+  height: 1000px;
+  color: white;
+  border-radius: 4px
+}

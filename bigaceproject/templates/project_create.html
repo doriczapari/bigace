@@ -1,33 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends 'base.html' %}
 
+{% block content %}
     <div>
         <form role="form" method="POST">
         {% csrf_token %}
         <div class="row">
         {% for field in form %}
-            <div {% if field.errors %}has-error{% endif %}>
-                <label for="{{ id_for_label }}">
-                    <span class="title {% if field.field.required %}required{% endif %}">{{ field.label }}</span>
-                    {% for error in field.errors %}
-                        {{ error }}
-                    {% endfor %}
-                </label>
-
-                    {{ field }}
-            </div>
+              <fieldset class="form-group">
+                <div {% if field.errors %}has-error{% endif %}>
+                    <label for="{{ id_for_label }}">
+                        <span class="title {% if field.field.required %}required{% endif %}">{{ field.label }}</span>
+                        {% for error in field.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </label>
+                    <br>
+                      <div class="">
+                        {{ field }}
+                      </div>
+                </div>
+              </fieldset>
         {% endfor %}
         </div>
         <div>
-            <button type="submit" > Start a wonderful journey! </button>
+            <button class = "btn btn-default" type="submit" > Start a wonderful journey! </button>
         </div>
         </form>
     </div>
-
-</body>
-</html>
+{% endblock %}

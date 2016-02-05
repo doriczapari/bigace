@@ -1,11 +1,11 @@
-from bigaceproject.models import Project
+from bigaceproject.models import Project, UserProfile
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render
-
-# Create your views here.
+# from django.core.urlresolvers import reverse_lazy
+# from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView
-from . import models
+from django.views.generic.edit import UpdateView
+
+# from . import models
 
 
 class ProjectListView(ListView):
@@ -30,5 +30,13 @@ class UserCreateView(CreateView):
 
 
 class UserDetailView(DetailView):
+
     template_name = 'user_details.html'
     model = User
+
+
+class UserUpdateView(UpdateView):
+
+    template_name = 'user_update.html'
+    model = UserProfile
+    fields = ['user', 'skills', 'twitter', 'github']

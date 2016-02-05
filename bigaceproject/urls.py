@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from .views import UserListView, UserCreateView, UserDetailView, UserUpdateView
-from .views import ProjectCreateView
+from .views import ProjectCreateView, UserRateView
 
 urlpatterns = [
     # url(regex=r'^main/$',
@@ -18,6 +18,9 @@ urlpatterns = [
     url(regex=r'^user/update/(?P<pk>[0-9]+)/$',
         view=UserUpdateView.as_view(),
         name='user_update'),
+    url(regex=r'^rate/$',
+        view=UserRateView.as_view(),
+        name='user_rate'),
     url(regex=r'^project/create/$',
         view=ProjectCreateView.as_view(),
         name='project_create'),

@@ -1,9 +1,10 @@
 from bigaceproject.models import Project
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from . import models
 
 
@@ -23,4 +24,11 @@ class UserCreateView(CreateView):
     template_name = 'user_create.html'
     model = User
     fields = ['username', 'email']
-    success_url = '/'   # FIXME
+
+    def get_success_url(self):
+        return '/user/{0}'.format(self.object.id)
+
+
+class UserDetailView(DetailView):
+    template_name = 'user_details.html'
+    model = User

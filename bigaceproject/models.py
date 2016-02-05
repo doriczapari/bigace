@@ -7,6 +7,12 @@ from django.utils import timezone
 class Technology(models.Model):
     name = models.CharField(max_length=264)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Technologies'
+
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User)
@@ -25,6 +31,9 @@ class Project(models.Model):
     max_people = models.PositiveSmallIntegerField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return self.name
+
     @property
     def total_points(self):
         total = 0
@@ -40,3 +49,6 @@ class Task(models.Model):
     project = models.ForeignKey(Project, related_name='tasks')
     completed = models.BooleanField(default=False)
     points = models.PositiveSmallIntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name

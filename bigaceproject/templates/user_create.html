@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends 'base.html' %}
 
+{% block content %}
     <div>
         <form role="form" method="POST">
         {% csrf_token %}
-        <div class="row">
+        <!-- <div class="row"> -->
         {% for field in form %}
             <div {% if field.errors %}has-error{% endif %}>
                 <label for="{{ id_for_label }}">
@@ -22,12 +17,11 @@
                     {{ field }}
             </div>
         {% endfor %}
-        </div>
+        <!-- </div> -->
         <div>
             <button type="submit" >Update </button>
         </div>
         </form>
     </div>
 
-</body>
-</html>
+{% endblock %}

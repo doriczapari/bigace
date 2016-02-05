@@ -6,15 +6,16 @@
         {% csrf_token %}
         <!-- <div class="row"> -->
         {% for field in form %}
-            <div {% if field.errors %}has-error{% endif %}>
+            <div class = "form-control" {% if field.errors %}has-error{% endif %}>
                 <label for="{{ id_for_label }}">
                     <span class="title {% if field.field.required %}required{% endif %}">{{ field.label }}</span>
                     {% for error in field.errors %}
                         {{ error }}
                     {% endfor %}
                 </label>
-
+                <div class = "form-control" >
                     {{ field }}
+                </div>
             </div>
         {% endfor %}
         <!-- </div> -->

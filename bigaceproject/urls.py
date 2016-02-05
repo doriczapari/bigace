@@ -1,8 +1,5 @@
 from django.conf.urls import url
-from .views import UserListView, UserCreateView, UserDetailView, UserUpdateView
-from .views import ProjectCreateView, UserRateView, ProjectListView
-
-
+from .views import *
 urlpatterns = [
     # url(regex=r'^main/$',
     #     view=Main.as_view(),
@@ -28,10 +25,10 @@ urlpatterns = [
     url(regex=r'^project/list/$',
         view=ProjectListView.as_view(),
         name='project_list'),
-    url(regex=r'^user/(?P<pk>[0-9]+)/$',
-        view=UserDetailView.as_view(),
-        name='user_detail'),
-    # url(regex=r'^project/(?P<pk>[0-9]+)/$',
-    #     view=UserUpdate.as_view(),
-    #     name='project_details')
+     url(regex=r'^user/(?P<pk>[0-9]+)/$',
+         view=UserDetailView.as_view(),
+         name='user_details'),
+     url(regex=r'^project/(?P<pk>[0-9]+)/$',
+         view=ProjectDetailView.as_view(),
+         name='project_details'),
     ]

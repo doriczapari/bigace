@@ -1,5 +1,9 @@
 from bigaceproject.models import Project, UserProfile, Rating
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render, redirect
+
+# Create your views here.
 from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.edit import UpdateView
 
@@ -21,6 +25,17 @@ class ProjectCreateView(CreateView):
     #     return '/project/{0}'.format(self.object.id)
 
 
+class ProjectDetailView(DetailView):
+    template_name = 'project_details.html'
+    model = Project
+
+    def post(self, request, *args, **kwargs):
+        project = self.get_object()
+        project.participants.add(request.user)
+        project.save()
+        return redirect(reverse_lazy('bigace:project_details', args=(), kwargs={'pk': project.pk}))
+
+
 class UserListView(ListView):
     template_name = 'user_list.html'
     model = User
@@ -37,7 +52,7 @@ class UserCreateView(CreateView):
 
 
 class UserDetailView(DetailView):
-
+    
     template_name = 'user_details.html'
     model = User
 

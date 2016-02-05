@@ -11,7 +11,7 @@ class Technology(models.Model):
         (2, 'Expert'),
     )
     name = models.CharField(max_length=264)
-    level = models.SmallIntegerField(blank=True, choices=LEVEL_CHOICES)
+    level = models.SmallIntegerField(null=True, blank=True, choices=LEVEL_CHOICES)
 
     def __str__(self):
         return self.name

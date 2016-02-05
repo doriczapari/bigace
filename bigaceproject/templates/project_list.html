@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for project in object_list %}
-        <p>Name: {{ project.name }}</p>
+        <a href="{% url 'bigace:project_details' pk=project.pk %}"><h4>{{ project.name }}</h4></a>
 
     {% endfor %}
 

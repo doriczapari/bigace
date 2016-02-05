@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hi!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
     {% for user in object_list %}
-        <p>Name: {{ user.username }}</p>
+        <a href="{% url 'bigace:user_details' pk=user.pk %}"><h3>{{ user.username }}</h3></a>
+        {% for profile in user.userprofile_set.all %}
+            {% for skill in profile.skills.all %}
+            <li>
+                <ul>{{ skill }}</ul>
+            </li>
+            {% endfor %}
+        {% endfor %}
 
     {% endfor %}
 
-</body>
-</html>
+{% endblock %}

@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-YO
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ object.username }}</h2>
+    <p>{{ object.email }}</p>
+    {% for profile in object.userprofile_set.all %}
+        {% for skill in profile.skills.all %}
+            <li>
+                <ul>{{ skill }}</ul>
+            </li>
+        {% endfor %}
+        <p>GitHub: {{ profile.github }}</p>
+        <p>Twitter: {{ profile.twitter }}</p>
+
+    {% endfor %}
+
+{% endblock %}

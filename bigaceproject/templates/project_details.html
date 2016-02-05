@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ object.name }}</h1>
+<h4>{{ object.description }}</h4>
+<p>Deadline: {{ object.deadline }}</p>
+<p><b>Participants</b></p>
+{% for p in object.participants.all %}
+    <p>{{ p.username }}</p>
+{% endfor %}
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Join project</button>
+
+{% endblock %}

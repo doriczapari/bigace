@@ -53,4 +53,4 @@ class UserRateView(CreateView):
 
     template_name = 'user_rate.html'
     model = Rating
-    fields = ['rating_to', 'rating_from', 'point']
+    fields = ['rating_to', 'point']

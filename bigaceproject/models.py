@@ -60,7 +60,6 @@ class Project(models.Model):
 class Rating(models.Model):
     rating_to = models.ForeignKey(User, related_name='rating_to',
                                   verbose_name='Rated person')
-    rating_from = models.ForeignKey(User, related_name='rating_from')
     point = models.IntegerField(validators=[MinValueValidator(1),
                                 MaxValueValidator(10)])
 

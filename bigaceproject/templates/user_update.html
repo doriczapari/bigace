@@ -1,14 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hi!</title>
-</head>
-<body>
-    {% for user in object_list %}
-        <p>Name: {{ user.username }}</p>
+{% extends 'base.html' %}
 
-    {% endfor %}
+{% block content %}
+    <div>
+        <form role="form" method="POST">
+        {% csrf_token %}
+        <!-- <div class="row"> -->
+        {% for field in form %}
+            <div {% if field.errors %}has-error{% endif %}>
+                <label for="{{ id_for_label }}">
+                    <span class="title {% if field.field.required %}required{% endif %}">{{ field.label }}</span>
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </label>
 
-</body>
-</html>
+                    {{ field }}
+            </div>
+        {% endfor %}
+        <!-- </div> -->
+        <div>
+            <button type="submit" >Update </button>
+        </div>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
     <div>
         <form role="form" method="POST">
@@ -14,7 +14,7 @@
                     {% endfor %}
                 </label>
 
-                    {{ field }}
+                    {{ field|add_class:"form-control" }}
             </div>
         {% endfor %}
         <!-- </div> -->

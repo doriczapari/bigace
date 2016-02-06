@@ -25,8 +25,8 @@ class ProjectCreateView(CreateView):
     fields = ['name', 'description', 'owner', 'deadline', 'technologies',
               'max_people', 'created_at']
 
-    # def get_success_url(self):
-    #     return '/project/{0}'.format(self.object.id)
+    def get_success_url(self):
+        return '/project/{0}'.format(self.object.id)
 
 
 class ProjectDetailView(DetailView):
@@ -83,3 +83,6 @@ class UserRateView(CreateView):
     template_name = 'user_rate.html'
     model = Rating
     fields = ['rating_to', 'point']
+
+    def get_success_url(self):
+        return '/rate/'

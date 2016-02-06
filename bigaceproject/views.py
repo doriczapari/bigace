@@ -45,14 +45,21 @@ class UserCreateView(CreateView):
 
     template_name = 'user_create.html'
     model = User
-    fields = ['username', 'email']
+    fields = ['username', 'email', 'password']
 
     def get_success_url(self):
         return '/user/{0}'.format(self.object.id)
 
+    def form_valid(self, form):
+        valid = super(UserCreateView, self).form_valid(form)
+        password = form.cleaned_data.get('password')
+        form.instance.set_password(password)
+        form.instance.save()
+        return valid
+
 
 class UserDetailView(DetailView):
-    
+
     template_name = 'user_details.html'
     model = User
 

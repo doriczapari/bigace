@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
     <div>
@@ -6,8 +7,8 @@
         {% csrf_token %}
         <div class="row">
         {% for field in form %}
-              <fieldset class="form-group">
-                <div {% if field.errors %}has-error{% endif %}>
+              <!-- <fieldset class="form-group"> -->
+                <div class="form-group"{% if field.errors %}has-error{% endif %}>
                     <label for="{{ id_for_label }}">
                         <span class="title {% if field.field.required %}required{% endif %}">{{ field.label }}</span>
                         {% for error in field.errors %}
@@ -15,15 +16,13 @@
                         {% endfor %}
                     </label>
                     <br>
-                      <div class="">
-                        {{ field }}
-                      </div>
+                        {{ field|add_class:"form-control" }}
                 </div>
-              </fieldset>
+              <!-- </fieldset> -->
         {% endfor %}
         </div>
         <div>
-            <button class = "btn btn-default" type="submit" > Start a wonderful journey! </button>
+            <button class ="btn btn-default" type="submit" >Start a wonderful journey!</button>
         </div>
         </form>
     </div>

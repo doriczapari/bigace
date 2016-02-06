@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rating</title>
-</head>
-<h1>Rate your team!</h1>
-<body>
+{% extends 'base.html' %}
+{% load widget_tweaks %}
 
-    <div>
+{% block content %}
+
+    <div class="col-lg-6">
         <form role="form" method="POST">
         {% csrf_token %}
         <div class="row">
@@ -20,15 +16,18 @@
                     {% endfor %}
                 </label>
 
-                    {{ field }}
+                    {{ field|add_class:"form-control" }}
             </div>
         {% endfor %}
         </div>
+        <br>
         <div>
-            <button type="submit" > Rate! </button>
+            <button class="btn btn-default" type="submit" > Rate! </button>
         </div>
         </form>
     </div>
 
 </body>
 </html>
+
+{% endblock %}

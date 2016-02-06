@@ -13,3 +13,7 @@
 .form-control {
   width: 450px;
 }
+.sidebar-list a {
+    color: white;
+    font-size: 16px;
+}

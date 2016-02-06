@@ -1,11 +1,15 @@
 from bigaceproject.models import Project, UserProfile, Rating
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render, redirect
-
-# Create your views here.
+from django.shortcuts import redirect
+from django.views.generic.base import TemplateView
 from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.edit import UpdateView
+
+
+class MainView(TemplateView):
+
+    template_name = 'main.html'
 
 
 class ProjectListView(ListView):
@@ -69,6 +73,9 @@ class UserUpdateView(UpdateView):
     template_name = 'user_update.html'
     model = UserProfile
     fields = ['user', 'skills', 'twitter', 'github']
+
+    def get_success_url(self):
+        return '/user/{0}'.format(self.object.user.id)
 
 
 class UserRateView(CreateView):

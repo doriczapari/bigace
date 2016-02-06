@@ -46,7 +46,17 @@
     <div class="container-fluid">
       <div class="row">
           <div class="col-md-2 sidebar">
-            Sidebar Menu
+            <h2>Menu</h2>
+            <ul class="sidebar-list">
+            <li><a href="{% url 'bigace:main' %}">Main menu</a></li>
+            {% for profile in user.userprofile_set.all %}
+            <li>
+            <a href="{% url 'bigace:user_update' pk=profile.pk %}">Profile</a>
+            </li>
+            {% endfor %}
+            <li><a href="{% url 'bigace:user_list' %}">Other Users</a></li>
+            <li><a href="{% url 'bigace:user_rate' %}">Rate your team!</a></li>
+          </ul>
           </div>
           <div class="main-content col-md-9">
             {% block content %}
